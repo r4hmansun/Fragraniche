@@ -1,131 +1,191 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragraniche | Luxury Perfumes</title>
+    <title>Fragraniche | Haute Parfumerie & Luxury Fragrance Boutique</title>
+    <meta name="description" content="Fragraniche - Koleksi parfum mewah dan aroma eksklusif dengan piramida notes terlengkap.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <span class="announcement-text">Complimentary Luxury Sample Set with Every 100ml Order &bull; Worldwide Express Delivery</span>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header" id="mainHeader">
         <div class="container header-content">
-            <a href="#" class="logo">Fragraniche</a>
-            <nav class="nav">
+            <a href="#" class="logo">FRAGRANICHE<span>PARIS</span></a>
+            
+            <nav class="nav" id="mainNav">
                 <ul class="nav-list">
                     <li><a href="#about">About</a></li>
+                    <li><a href="#collection">Collection</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contacts">Contact</a></li>
                 </ul>
             </nav>
+
             <div class="header-actions">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <!-- Search Toggle -->
+                <button id="searchToggleBtn" class="icon-btn" aria-label="Cari Parfum" title="Cari Parfum">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <button class="mobile-menu-btn" aria-label="Open Menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+
+                <!-- Theme Toggle (Dark / Light Mode) -->
+                <button id="themeToggleBtn" class="icon-btn" aria-label="Ganti Tema Gelap/Terang" title="Ganti Mode">
+                    <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
+
+                <!-- Cart Button -->
+                <button id="cartToggleBtn" class="icon-btn cart-btn" aria-label="Shopping Bag" title="Shopping Bag">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span id="cartCountBadge" class="badge">0</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn icon-btn" aria-label="Open Menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Collapsible Search Bar -->
+        <div id="searchDrawer" class="search-drawer">
+            <div class="container search-inner">
+                <input type="text" id="catalogSearchInput" placeholder="Cari parfum berdasarkan nama atau notes (cth: Bergamot, Vanilla, Oud, Rose)...">
+                <button id="clearSearchBtn" class="clear-search-btn" aria-label="Hapus Pencarian">&times;</button>
             </div>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section class="hero fade-in">
-            <div class="container hero-content">
-                <h1 class="hero-title">The Essence of Elegance</h1>
-                <p class="hero-subtitle">Discover a world of captivating scents, crafted for the distinguished.</p>
-                <a href="#portfolio" class="btn btn-primary">Explore Collection</a>
+        <section class="hero fade-in" id="heroSection">
+            <div class="hero-bg-overlay"></div>
+            <div class="container hero-content-wrapper">
+                <div class="hero-content">
+                    <span class="hero-kicker">HAUTE PARFUMERIE</span>
+                    <h1 class="hero-title">The Essence of Elegance</h1>
+                    <p class="hero-subtitle">Discover a world of captivating scents, masterfully crafted for the distinguished connoisseur.</p>
+                    <div class="hero-cta-group">
+                        <a href="#collection" class="btn btn-primary">Explore Collection</a>
+                        <a href="#about" class="btn btn-outline">Our Heritage</a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Banner: Ganti src gambar ini dengan foto Anda di folder images/ -->
+                <div class="hero-visual-card">
+                    <div class="hero-image-frame">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=80" alt="Fragraniche Signature Perfume" loading="eager">
+                    </div>
+                    <div class="hero-floating-badge">
+                        <span class="badge-tag">Private Blend</span>
+                        <p class="badge-title">Extrait de Parfum &bull; 30% Conc.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- About Us Section -->
+        <!-- Collection Section -->
+        <section id="collection" class="section collection-section">
+            <div class="container">
+                <div class="section-header-row">
+                    <div>
+                        <span class="section-kicker">CURATED SELECTION</span>
+                        <h2 class="section-title">The Flacon Collection</h2>
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="category-filters-container" id="categoryFilters">
+                    <button class="filter-chip active" data-category="all">Semua Aroma</button>
+                    <button class="filter-chip" data-category="Woody & Oud">Woody & Oud</button>
+                    <button class="filter-chip" data-category="Gourmand & Vanilla">Gourmand & Vanilla</button>
+                    <button class="filter-chip" data-category="Fresh & Citrus">Fresh & Citrus</button>
+                    <button class="filter-chip" data-category="Floral">Floral</button>
+                    <button class="filter-chip" data-category="Leather & Smoky">Leather & Smoky</button>
+                </div>
+
+                <!-- Product Grid (Produk dapat diedit langsung di script.js atau ganti foto di folder images/) -->
+                <div class="product-grid" id="productGrid">
+                    <!-- Dynamic Product Cards will be rendered from script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us / Heritage Section -->
         <section id="about" class="section about">
             <div class="container">
                 <div class="about-grid fade-in">
                     <div class="about-text">
-                        <h2 class="section-title">Our Heritage</h2>
-                        <p>At Fragraniche, we believe that a fragrance is more than just a scent; it is an invisible signature that lingers in the memory. Founded with a passion for rare ingredients and masterful blending, our house creates perfumes that embody modern luxury.</p>
-                        <p>We source only the finest botanicals and pure absolutes, meticulously curating compositions that resonate with sophistication and grace.</p>
+                        <span class="section-kicker">OUR CRAFTSMANSHIP</span>
+                        <h2 class="section-title">Atelier & Heritage</h2>
+                        <div>
+                            <p>At Fragraniche, we believe that a fragrance is more than just a scent; it is an invisible signature that lingers in the memory. Founded with a passion for rare ingredients and masterful blending, our house creates perfumes that embody modern luxury.</p>
+                            <p>We source only the finest botanicals and pure absolutes from Grasse and beyond, meticulously curating compositions that resonate with sophistication, longevity, and grace.</p>
+                        </div>
+                        <div class="heritage-stats">
+                            <div class="stat-item">
+                                <span class="stat-num">100%</span>
+                                <span class="stat-lbl">Pure Botanical Absolutes</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-num">30%</span>
+                                <span class="stat-lbl">Extrait Concentration</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-num">12h+</span>
+                                <span class="stat-lbl">Average Sillage Life</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="about-image-placeholder">
-                        <div class="placeholder-box">Brand Heritage</div>
+
+                    <!-- Heritage Image Frame: Ganti src gambar ini dengan foto Anda -->
+                    <div class="about-image-wrapper">
+                        <div class="about-image-frame">
+                            <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1000&q=80" alt="Fragraniche Atelier & Heritage" loading="lazy">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Our Services Section -->
+        <!-- Our Bespoke Services Section -->
         <section id="services" class="section services">
             <div class="container">
-                <h2 class="section-title text-center fade-in">Bespoke Services</h2>
+                <div class="text-center">
+                    <span class="section-kicker">EXPERIENCE EXCELLENCE</span>
+                    <h2 class="section-title text-center fade-in">Bespoke Services</h2>
+                </div>
                 <div class="services-grid">
                     <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
                         <h3 class="service-title">Signature Blends</h3>
                         <p>Explore our exclusive collection of expertly crafted, ready-to-wear fragrances designed for both men and women.</p>
                     </div>
                     <div class="service-card fade-in delay-1">
+                        <div class="service-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polygon points="12 6 12 12 16 14"></polygon></svg>
+                        </div>
                         <h3 class="service-title">Custom Consultations</h3>
-                        <p>Work directly with our master perfumers to discover your perfect scent profile in a private setting.</p>
+                        <p>Work directly with our master perfumers to discover your unique olfactory profile in a private virtual or boutique setting.</p>
                     </div>
                     <div class="service-card fade-in delay-2">
+                        <div class="service-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        </div>
                         <h3 class="service-title">Personalized Engraving</h3>
-                        <p>Make your bottle truly yours with our complimentary, elegant hand-engraving service.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="section portfolio">
-            <div class="container">
-                <h2 class="section-title text-center fade-in">Our Collection</h2>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item fade-in">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">Midnight Amber</div>
-                        </div>
-                        <h3 class="portfolio-title">Midnight Amber</h3>
-                        <p class="portfolio-desc">A deep, intoxicating blend of agarwood and black rose.</p>
-                    </div>
-                    <div class="portfolio-item fade-in delay-1">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">Velvet Vanilla</div>
-                        </div>
-                        <h3 class="portfolio-title">Velvet Vanilla</h3>
-                        <p class="portfolio-desc">Warm bourbon vanilla laced with spiced cardamom.</p>
-                    </div>
-                    <div class="portfolio-item fade-in delay-2">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">Citrus Solstice</div>
-                        </div>
-                        <h3 class="portfolio-title">Citrus Solstice</h3>
-                        <p class="portfolio-desc">Bright bergamot and neroli capturing the essence of summer.</p>
-                    </div>
-                    <div class="portfolio-item fade-in">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">Oud Royale</div>
-                        </div>
-                        <h3 class="portfolio-title">Oud Royale</h3>
-                        <p class="portfolio-desc">The majestic complexity of pure aged oud.</p>
-                    </div>
-                    <div class="portfolio-item fade-in delay-1">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">White Jasmine</div>
-                        </div>
-                        <h3 class="portfolio-title">White Jasmine</h3>
-                        <p class="portfolio-desc">A delicate, ethereal white floral arrangement.</p>
-                    </div>
-                    <div class="portfolio-item fade-in delay-2">
-                        <div class="portfolio-image-placeholder">
-                            <div class="placeholder-box">Smoked Leather</div>
-                        </div>
-                        <h3 class="portfolio-title">Smoked Leather</h3>
-                        <p class="portfolio-desc">Rich saddle leather with wisps of smoky incense.</p>
+                        <p>Make your bottle truly bespoke with complimentary gold foil or diamond tip engraving with your initials or name.</p>
                     </div>
                 </div>
             </div>
@@ -134,55 +194,164 @@
         <!-- Contacts Section -->
         <section id="contacts" class="section contacts">
             <div class="container">
-                <h2 class="section-title text-center fade-in">Get in Touch</h2>
+                <div class="text-center">
+                    <span class="section-kicker">GET IN TOUCH</span>
+                    <h2 class="section-title text-center fade-in">Concierge & Inquiries</h2>
+                </div>
                 <div class="contacts-grid fade-in">
                     <div class="contact-info">
                         <h3>Visit Our Boutique</h3>
-                        <p>123 Luxury Avenue<br>New York, NY 10022</p>
-                        <h3>Contact Details</h3>
-                        <p>Email: concierge@fragraniche.com<br>Phone: +1 (555) 123-4567</p>
+                        <p>123 Luxury Avenue, Suite 400<br>New York, NY 10022</p>
+                        
+                        <h3>Direct Inquiries</h3>
+                        <p>Email: concierge@fragraniche.com<br>Phone: +1 (555) 123-4567<br>WhatsApp: +1 (555) 890-1234</p>
+                        
                         <h3>Opening Hours</h3>
-                        <p>Monday - Saturday: 10:00 AM - 8:00 PM<br>Sunday: Closed</p>
+                        <p>Monday – Saturday: 10:00 AM – 8:00 PM<br>Sunday: By Private Appointment Only</p>
                     </div>
+
                     <form class="contact-form" id="contactForm">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Alamat Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="subject">Subjek Konsultasi</label>
+                            <select id="subject" name="subject">
+                                <option value="Bespoke Fragrance Consultation">Bespoke Fragrance Consultation</option>
+                                <option value="Bottle Engraving Request">Bottle Engraving Request</option>
+                                <option value="Product Order Inquiry">Product Order Inquiry</option>
+                                <option value="Private Event / Wedding">Private Event / Wedding Gift</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div class="form-group">
+                            <label for="message">Pesan / Preferensi Aroma</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Ceritakan preferensi aroma atau pertanyaan Anda..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Kirim Pesan Concierge</button>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h2>Fragraniche</h2>
-                    <p>The hallmark of modern olfactive luxury.</p>
+                    <h2>FRAGRANICHE</h2>
+                    <p>The hallmark of modern olfactive luxury and fine bespoke perfume compositions.</p>
                 </div>
                 <div class="footer-links">
+                    <h4>Navigasi</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#collection">Fragrance Portfolio</a>
+                    <a href="#services">Bespoke Services</a>
+                    <a href="#contacts">Contact Concierge</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Pelayanan</h4>
+                    <a href="#">Bespoke Consultations</a>
+                    <a href="#">Complimentary Samples</a>
+                    <a href="#">Shipping & Authenticity</a>
                     <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Shipping & Returns</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Fragraniche. All rights reserved.</p>
+                <p>&copy; 2026 Fragraniche Haute Parfumerie. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- ==================== MODALS & DRAWERS ==================== -->
+
+    <!-- 1. Shopping Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Shopping Bag (<span id="cartDrawerCount">0</span>)</h3>
+            <button class="close-modal-btn" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items-body" id="cartItemsList">
+            <!-- Dynamic Cart items -->
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-subtotal-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotalDisplay" class="subtotal-val">$0</span>
+            </div>
+            <p class="cart-note">Pajak dan pengiriman ekspres dihitung saat checkout.</p>
+            <button class="btn btn-primary btn-block" onclick="triggerCheckout()">Proceed to Checkout</button>
+            <button class="btn btn-outline btn-block btn-sm" onclick="clearCart()">Kosongkan Bag</button>
+        </div>
+    </aside>
+
+    <!-- 2. Product Detail (Quick View) Modal with Fragrance Notes Pyramid -->
+    <div class="modal-backdrop" id="quickViewModal">
+        <div class="modal-dialog modal-lg">
+            <button class="close-modal-btn" onclick="closeModal('quickViewModal')">&times;</button>
+            <div class="modal-product-layout">
+                <div class="modal-product-img-wrap">
+                    <img id="qvImage" src="" alt="Perfume Detail">
+                    <span id="qvCategoryBadge" class="product-category-tag">Woody & Oud</span>
+                </div>
+                <div class="modal-product-details">
+                    <span class="section-kicker" id="qvConcentration">EXTRAIT DE PARFUM</span>
+                    <h2 id="qvTitle" class="modal-product-title">Midnight Amber</h2>
+                    <p id="qvSubtitle" class="modal-product-subtitle">A deep, intoxicating blend of rare agarwood and black velvet rose.</p>
+                    
+                    <div class="modal-price-row">
+                        <span id="qvPrice" class="modal-price">$285</span>
+                        <span class="modal-vol-label">Volume: </span>
+                        <div class="size-pill-group">
+                            <button class="size-pill active" onclick="selectQuickViewSize(50, this)">50 ml</button>
+                            <button class="size-pill" onclick="selectQuickViewSize(100, this)">100 ml</button>
+                        </div>
+                    </div>
+
+                    <!-- Olfactory Notes Pyramid -->
+                    <div class="notes-pyramid-container">
+                        <h4 class="notes-pyramid-title">Piramida Aroma (Fragrance Notes)</h4>
+                        <div class="note-level">
+                            <span class="note-level-label">TOP NOTES:</span>
+                            <span id="qvTopNotes" class="note-level-value">Bergamot, Pink Pepper</span>
+                        </div>
+                        <div class="note-level">
+                            <span class="note-level-label">HEART NOTES:</span>
+                            <span id="qvHeartNotes" class="note-level-value">Turkish Rose, Smoked Cedar</span>
+                        </div>
+                        <div class="note-level">
+                            <span class="note-level-label">BASE NOTES:</span>
+                            <span id="qvBaseNotes" class="note-level-value">Aged Agarwood (Oud), Ambergris, Musk</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-description-box">
+                        <p id="qvDescription">Deskripsi lengkap mengenai karakter wangi, sillage, dan momen terbaik penggunaan parfum ini.</p>
+                    </div>
+
+                    <div class="modal-actions-row">
+                        <div class="quantity-input-group">
+                            <button onclick="changeQvQuantity(-1)">-</button>
+                            <input type="number" id="qvQuantityInput" value="1" min="1" max="10" readonly>
+                            <button onclick="changeQvQuantity(1)">+</button>
+                        </div>
+                        <button class="btn btn-primary flex-1" id="qvAddToCartBtn">Tambah ke Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Application Script -->
     <script src="script.js"></script>
 </body>
 </html>
