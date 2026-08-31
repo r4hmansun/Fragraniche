@@ -518,6 +518,9 @@ button, input, select, textarea {
 .filter-chip.active {
     background: var(--text-primary);
     color: var(--bg-primary);
+    border-color: var(--text-primary);
+}
+
 .carousel-nav-controls {
     display: flex;
     gap: 0.6rem;
@@ -547,9 +550,10 @@ button, input, select, textarea {
 }
 
 .carousel-btn:disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: not-allowed;
     transform: none;
+    pointer-events: none;
 }
 
 .product-carousel-wrapper {
@@ -557,21 +561,26 @@ button, input, select, textarea {
     width: 100%;
 }
 
-/* Product Grid & Carousel Track (Slides smoothly horizontally for 6+ products) */
+/* Product Grid & Carousel Track */
 .product-grid {
     display: flex;
     gap: 1.8rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    padding: 0.4rem 0.2rem 1.6rem 0.2rem;
+    padding: 0.6rem 0.2rem 1.8rem 0.2rem;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+}
+
+.product-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .product-card {
-    flex: 0 0 310px;
-    max-width: 310px;
+    flex: 0 0 calc(33.333% - 1.25rem);
+    min-width: 290px;
+    max-width: 380px;
     scroll-snap-align: start;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -583,10 +592,17 @@ button, input, select, textarea {
     position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .product-card {
-        flex: 0 0 280px;
-        max-width: 280px;
+        flex: 0 0 calc(50% - 1rem);
+        min-width: 270px;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-card {
+        flex: 0 0 85%;
+        min-width: 260px;
     }
 }
 
