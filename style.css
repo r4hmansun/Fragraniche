@@ -518,17 +518,61 @@ button, input, select, textarea {
 .filter-chip.active {
     background: var(--text-primary);
     color: var(--bg-primary);
-    border-color: var(--text-primary);
+.carousel-nav-controls {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
 }
 
-/* Product Grid */
+.carousel-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.carousel-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-2px);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.product-carousel-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Product Grid & Carousel Track (Slides smoothly horizontally for 6+ products) */
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    display: flex;
+    gap: 1.8rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.4rem 0.2rem 1.6rem 0.2rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
 .product-card {
+    flex: 0 0 310px;
+    max-width: 310px;
+    scroll-snap-align: start;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -537,6 +581,13 @@ button, input, select, textarea {
     flex-direction: column;
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     position: relative;
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        flex: 0 0 280px;
+        max-width: 280px;
+    }
 }
 
 .product-card:hover {

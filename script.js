@@ -4,11 +4,11 @@
  * CARA MENGEDIT DATA & GAMBAR PARFUM:
  * Anda dapat mengedit judul, harga, aroma notes, atau mengganti path gambar
  * pada daftar array `PRODUCTS` di bawah ini.
- * Contoh mengganti gambar lokal: image: 'images/nama-foto.jpg'
+ * Jika produk berjumlah 6+, otomatis aktif mode carousel horizontal.
  */
 
 // ==========================================
-// 1. DATA KATALOG PARFUM (EDITABLE)
+// 1. DATA KATALOG PARFUM (8 LUXURY FLACONS)
 // ==========================================
 const PRODUCTS = [
     {
@@ -88,6 +88,32 @@ const PRODUCTS = [
         heartNotes: 'Tuscan Leather, Smoked Cade, Violet',
         baseNotes: 'Birch Tar, Amberwood, Vetiver Roots',
         description: 'Daring, raw, and undeniably charismatic. Smoked Leather wraps supple antique leather in aromatic incense and sweet liqueur nuances.'
+    },
+    {
+        id: 'frag-7',
+        title: 'Santale Sanctum',
+        category: 'Woody & Oud',
+        concentration: 'Extrait de Parfum',
+        price: 310,
+        subtitle: 'Sacred Mysore sandalwood infused with creamy iris and golden frankincense.',
+        image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80',
+        topNotes: 'Australian Sandalwood, Cardamom, Papyrus',
+        heartNotes: 'Florentine Iris, Violet Leaf, Cedar',
+        baseNotes: 'Amber Resin, Iso E Super, White Musk',
+        description: 'An ethereal sanctuary of sacred woods. Warm, velvety sandalwood interlaces with powdery iris for an unforgettable meditative sillage.'
+    },
+    {
+        id: 'frag-8',
+        title: 'Rose Damascena',
+        category: 'Floral',
+        concentration: 'Pure Parfum Extrait',
+        price: 275,
+        subtitle: 'Morning-picked Bulgarian damask roses crowned with pink lychee and spiced cloves.',
+        image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80',
+        topNotes: 'Pink Pepper, Lychee, Italian Lemon',
+        heartNotes: 'Bulgarian Rose Absolute, Peony, Geranium',
+        baseNotes: 'Amberwood, White Honey, Cashmeran',
+        description: 'The queen of flowers presented in imperial splendor. Fresh, dewy, and majestically romantic.'
     }
 ];
 
@@ -99,7 +125,7 @@ let currentQuickViewProduct = null;
 let currentQuickViewSize = 50;
 
 // ==========================================
-// 3. RENDER CATALOG
+// 3. RENDER CATALOG & CAROUSEL
 // ==========================================
 function renderProducts() {
     const grid = document.getElementById('productGrid');
@@ -143,10 +169,49 @@ function renderProducts() {
             </div>
         `;
     }).join('');
+
+    setTimeout(updateCarouselControls, 100);
 }
 
 // ==========================================
-// 4. QUICK VIEW / FRAGRANCE PYRAMID MODAL
+// 4. CAROUSEL SLIDER LOGIC
+// ==========================================
+function setupCarousel() {
+    const grid = document.getElementById('productGrid');
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
+
+    if (!grid || !prevBtn || !nextBtn) return;
+
+    prevBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+
+    grid.addEventListener('scroll', updateCarouselControls, { passive: true });
+    window.addEventListener('resize', updateCarouselControls, { passive: true });
+}
+
+function updateCarouselControls() {
+    const grid = document.getElementById('productGrid');
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
+    const navControls = document.getElementById('carouselNavControls');
+
+    if (!grid || !prevBtn || !nextBtn || !navControls) return;
+
+    const isScrollable = grid.scrollWidth > grid.clientWidth + 10;
+    navControls.style.display = isScrollable ? 'flex' : 'none';
+
+    prevBtn.disabled = grid.scrollLeft <= 5;
+    nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
+}
+
+// ==========================================
+// 5. QUICK VIEW / FRAGRANCE PYRAMID MODAL
 // ==========================================
 function openQuickView(productId) {
     const p = PRODUCTS.find(item => item.id === productId);
@@ -191,7 +256,7 @@ function updateQuickViewPrice() {
 }
 
 // ==========================================
-// 5. MODAL & TOAST HELPERS
+// 6. MODAL & TOAST HELPERS
 // ==========================================
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -236,10 +301,11 @@ function escapeHtml(str) {
 }
 
 // ==========================================
-// 6. INITIALIZATION & EVENT LISTENERS
+// 7. INITIALIZATION & EVENT LISTENERS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
+    setupCarousel();
 
     // Theme Toggle Handler (Header Sun / Moon Icon)
     const themeToggleBtn = document.getElementById('themeToggleBtn');

@@ -76,6 +76,16 @@
                         <span class="section-kicker">CURATED SELECTION</span>
                         <h2 class="section-title">The Flacon Collection</h2>
                     </div>
+
+                    <!-- Carousel Controls (Muncul saat produk > 6 atau layar scrollable) -->
+                    <div class="carousel-nav-controls" id="carouselNavControls">
+                        <button class="carousel-btn" id="carouselPrevBtn" aria-label="Geser Kiri (Sebelumnya)" title="Sebelumnya">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <button class="carousel-btn" id="carouselNextBtn" aria-label="Geser Kanan (Berikutnya)" title="Berikutnya">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Category Filters -->
@@ -88,9 +98,11 @@
                     <button class="filter-chip" data-category="Leather & Smoky">Leather & Smoky</button>
                 </div>
 
-                <!-- Product Grid (Produk dirender secara dinamis dari array PRODUCTS di script.js) -->
-                <div class="product-grid" id="productGrid">
-                    <!-- Dynamic Product Cards will be rendered from script.js -->
+                <!-- Product Carousel Slider -->
+                <div class="product-carousel-wrapper">
+                    <div class="product-grid product-carousel-track" id="productGrid">
+                        <!-- Dynamic Product Cards will be rendered from script.js -->
+                    </div>
                 </div>
             </div>
         </section>
