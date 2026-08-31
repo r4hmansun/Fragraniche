@@ -333,22 +333,6 @@ function closeModal(modalId) {
     }
 }
 
-function showToast(message) {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<span>${escapeHtml(message)}</span>`;
-    container.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(10px)';
-        setTimeout(() => toast.remove(), 300);
-    }, 2800);
-}
-
 function escapeHtml(str) {
     if (!str) return '';
     return String(str)
@@ -360,13 +344,13 @@ function escapeHtml(str) {
 }
 
 // ==========================================
-// 7. INITIALIZATION & EVENT LISTENERS
+// 6. INITIALIZATION & EVENT LISTENERS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     setupCarousel();
 
-    // Theme Toggle Handler (Header Sun / Moon Icon)
+    // Theme Toggle Handler (Header Sun / Moon Icon - Clean Instant Transition)
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const htmlElement = document.documentElement;
     const savedTheme = localStorage.getItem('theme');
@@ -383,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            showToast(`Tema diubah ke ${newTheme === 'dark' ? 'Dark Mode (Obsidian)' : 'Light Mode (Alabaster)'}.`);
         });
     }
 
@@ -416,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Contact Form Submit Demo
+    // Contact Form Submit
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -427,15 +410,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
 
             setTimeout(() => {
-                showToast('Pesan konsultasi Anda berhasil dikirim.');
-                btn.textContent = 'Pesan Terkirim';
+                btn.textContent = 'Pesan Berhasil Terkirim';
                 contactForm.reset();
 
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.disabled = false;
                 }, 3000);
-            }, 1000);
+            }, 800);
         });
     }
 });
