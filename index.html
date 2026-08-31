@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
     <!-- Header Navigation -->
@@ -272,10 +272,12 @@
                     
                     <div class="modal-price-row">
                         <span id="qvPrice" class="modal-price">$285</span>
-                        <span class="modal-vol-label">Volume: </span>
-                        <div class="size-pill-group">
-                            <button class="size-pill active" onclick="selectQuickViewSize(50, this)">50 ml</button>
-                            <button class="size-pill" onclick="selectQuickViewSize(100, this)">100 ml</button>
+                        <div class="modal-vol-wrapper">
+                            <span class="modal-vol-label">Volume:</span>
+                            <div class="size-pill-group">
+                                <button type="button" class="size-pill active" onclick="selectQuickViewSize(50, this)">50 ml</button>
+                                <button type="button" class="size-pill" onclick="selectQuickViewSize(100, this)">100 ml</button>
+                            </div>
                         </div>
                     </div>
 
@@ -310,6 +312,6 @@
 
 
     <!-- Application Script -->
-    <script src="script.js"></script>
+    <script src="script.js?v=1.1"></script>
 </body>
 </html>
