@@ -174,8 +174,11 @@ function renderProducts() {
 }
 
 // ==========================================
-// 4. CAROUSEL SLIDER LOGIC
+// 4. CAROUSEL SLIDER LOGIC (AUTO-PLAY & MANUAL)
 // ==========================================
+let autoSlideInterval = null;
+const AUTO_SLIDE_DELAY = 3500; // 3.5 detik per slide
+
 function setupCarousel() {
     const grid = document.getElementById('productGrid');
     const prevBtn = document.getElementById('carouselPrevBtn');
@@ -184,15 +187,74 @@ function setupCarousel() {
     if (!grid || !prevBtn || !nextBtn) return;
 
     prevBtn.addEventListener('click', () => {
-        grid.scrollBy({ left: -340, behavior: 'smooth' });
+        slideCarousel('prev');
+        restartAutoSlide();
     });
 
     nextBtn.addEventListener('click', () => {
-        grid.scrollBy({ left: 340, behavior: 'smooth' });
+        slideCarousel('next');
+        restartAutoSlide();
     });
+
+    // Pause saat kursor berada di atas carousel, resume saat kursor keluar
+    grid.addEventListener('mouseenter', stopAutoSlide);
+    grid.addEventListener('mouseleave', startAutoSlide);
+    grid.addEventListener('touchstart', stopAutoSlide, { passive: true });
+    grid.addEventListener('touchend', startAutoSlide, { passive: true });
 
     grid.addEventListener('scroll', updateCarouselControls, { passive: true });
     window.addEventListener('resize', updateCarouselControls, { passive: true });
+
+    startAutoSlide();
+}
+
+function slideCarousel(direction = 'next') {
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    const card = grid.querySelector('.product-card');
+    const scrollAmount = card ? (card.offsetWidth + 28) : 340;
+
+    if (direction === 'next') {
+        const maxScrollLeft = grid.scrollWidth - grid.clientWidth;
+        // Jika sudah di ujung kanan, putar balik ke awal
+        if (grid.scrollLeft >= maxScrollLeft - 15) {
+            grid.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    } else {
+        if (grid.scrollLeft <= 15) {
+            grid.scrollTo({ left: grid.scrollWidth, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+    }
+}
+
+function startAutoSlide() {
+    stopAutoSlide();
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    // Hanya auto-slide jika item melebihi lebar layar (atau > 6 items)
+    if (grid.scrollWidth > grid.clientWidth + 10 || PRODUCTS.length > 6) {
+        autoSlideInterval = setInterval(() => {
+            slideCarousel('next');
+        }, AUTO_SLIDE_DELAY);
+    }
+}
+
+function stopAutoSlide() {
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+    }
+}
+
+function restartAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
 }
 
 function updateCarouselControls() {
@@ -205,9 +267,6 @@ function updateCarouselControls() {
 
     const isScrollable = grid.scrollWidth > grid.clientWidth + 10;
     navControls.style.display = isScrollable ? 'flex' : 'none';
-
-    prevBtn.disabled = grid.scrollLeft <= 5;
-    nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
 }
 
 // ==========================================
