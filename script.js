@@ -261,12 +261,12 @@ function updateCarouselControls() {
     const grid = document.getElementById('productGrid');
     const prevBtn = document.getElementById('carouselPrevBtn');
     const nextBtn = document.getElementById('carouselNextBtn');
-    const navControls = document.getElementById('carouselNavControls');
 
-    if (!grid || !prevBtn || !nextBtn || !navControls) return;
+    if (!grid || !prevBtn || !nextBtn) return;
 
     const isScrollable = grid.scrollWidth > grid.clientWidth + 10;
-    navControls.style.display = isScrollable ? 'flex' : 'none';
+    prevBtn.style.display = isScrollable ? 'inline-flex' : 'none';
+    nextBtn.style.display = isScrollable ? 'inline-flex' : 'none';
 }
 
 // ==========================================

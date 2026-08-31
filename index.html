@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body>
     <!-- Header Navigation -->
@@ -76,16 +76,6 @@
                         <span class="section-kicker">CURATED SELECTION</span>
                         <h2 class="section-title">The Flacon Collection</h2>
                     </div>
-
-                    <!-- Carousel Controls (Muncul saat produk > 6 atau layar scrollable) -->
-                    <div class="carousel-nav-controls" id="carouselNavControls">
-                        <button class="carousel-btn" id="carouselPrevBtn" aria-label="Geser Kiri (Sebelumnya)" title="Sebelumnya">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                        </button>
-                        <button class="carousel-btn" id="carouselNextBtn" aria-label="Geser Kanan (Berikutnya)" title="Berikutnya">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Category Filters -->
@@ -100,9 +90,15 @@
 
                 <!-- Product Carousel Slider -->
                 <div class="product-carousel-wrapper">
+                    <button class="carousel-btn carousel-btn-side carousel-prev-btn" id="carouselPrevBtn" aria-label="Geser Kiri (Sebelumnya)" title="Sebelumnya">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
                     <div class="product-grid product-carousel-track" id="productGrid">
                         <!-- Dynamic Product Cards will be rendered from script.js -->
                     </div>
+                    <button class="carousel-btn carousel-btn-side carousel-next-btn" id="carouselNextBtn" aria-label="Geser Kanan (Berikutnya)" title="Berikutnya">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -312,6 +308,6 @@
 
 
     <!-- Application Script -->
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js?v=1.2"></script>
 </body>
 </html>

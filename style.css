@@ -521,18 +521,12 @@ button, input, select, textarea {
     border-color: var(--text-primary);
 }
 
-.carousel-nav-controls {
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
-}
-
 .carousel-btn {
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-gold);
     color: var(--text-primary);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-full);
     display: inline-flex;
     align-items: center;
@@ -541,18 +535,39 @@ button, input, select, textarea {
     transition: var(--transition);
 }
 
-.carousel-btn:hover {
+.carousel-btn-side {
+    position: absolute;
+    top: calc(50% - 10px);
+    transform: translateY(-50%);
+    z-index: 25;
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    box-shadow: var(--shadow-elevated);
+    backdrop-filter: blur(8px);
+    opacity: 0.95;
+}
+
+.carousel-prev-btn {
+    left: -22px;
+}
+
+.carousel-next-btn {
+    right: -22px;
+}
+
+.carousel-btn-side:hover {
     background: var(--accent);
     color: #000;
     border-color: var(--accent);
     box-shadow: var(--shadow-gold);
-    transform: translateY(-2px);
+    transform: translateY(-50%) scale(1.08);
+    opacity: 1;
 }
 
 .carousel-btn:disabled {
     opacity: 0.25;
     cursor: not-allowed;
-    transform: none;
+    transform: translateY(-50%);
     pointer-events: none;
 }
 
@@ -1291,5 +1306,18 @@ textarea:focus {
 
     .footer-content {
         grid-template-columns: 1fr;
+    }
+
+    .carousel-btn-side {
+        width: 36px;
+        height: 36px;
+    }
+
+    .carousel-prev-btn {
+        left: -10px;
+    }
+
+    .carousel-next-btn {
+        right: -10px;
     }
 }
