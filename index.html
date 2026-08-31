@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- Header Navigation -->
     <header class="header" id="mainHeader">
         <div class="container header-content">
@@ -27,35 +26,16 @@
             </nav>
 
             <div class="header-actions">
-                <!-- Search Toggle -->
-                <button id="searchToggleBtn" class="icon-btn" aria-label="Cari Parfum" title="Cari Parfum">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
-
                 <!-- Theme Toggle (Dark / Light Mode) -->
                 <button id="themeToggleBtn" class="icon-btn" aria-label="Ganti Tema Gelap/Terang" title="Ganti Mode">
                     <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
 
-                <!-- Cart Button -->
-                <button id="cartToggleBtn" class="icon-btn cart-btn" aria-label="Shopping Bag" title="Shopping Bag">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                    <span id="cartCountBadge" class="badge">0</span>
-                </button>
-
                 <!-- Mobile Menu Button -->
                 <button class="mobile-menu-btn icon-btn" aria-label="Open Menu">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
-            </div>
-        </div>
-
-        <!-- Collapsible Search Bar -->
-        <div id="searchDrawer" class="search-drawer">
-            <div class="container search-inner">
-                <input type="text" id="catalogSearchInput" placeholder="Cari parfum berdasarkan nama atau notes (cth: Bergamot, Vanilla, Oud, Rose)...">
-                <button id="clearSearchBtn" class="clear-search-btn" aria-label="Hapus Pencarian">&times;</button>
             </div>
         </div>
     </header>
@@ -108,7 +88,7 @@
                     <button class="filter-chip" data-category="Leather & Smoky">Leather & Smoky</button>
                 </div>
 
-                <!-- Product Grid (Produk dapat diedit langsung di script.js atau ganti foto di folder images/) -->
+                <!-- Product Grid (Produk dirender secara dinamis dari array PRODUCTS di script.js) -->
                 <div class="product-grid" id="productGrid">
                     <!-- Dynamic Product Cards will be rendered from script.js -->
                 </div>
@@ -262,30 +242,9 @@
         </div>
     </footer>
 
-    <!-- ==================== MODALS & DRAWERS ==================== -->
+    <!-- ==================== MODALS ==================== -->
 
-    <!-- 1. Shopping Cart Drawer -->
-    <div class="cart-drawer-overlay" id="cartOverlay"></div>
-    <aside class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>Shopping Bag (<span id="cartDrawerCount">0</span>)</h3>
-            <button class="close-modal-btn" id="closeCartBtn">&times;</button>
-        </div>
-        <div class="cart-items-body" id="cartItemsList">
-            <!-- Dynamic Cart items -->
-        </div>
-        <div class="cart-footer" id="cartFooter">
-            <div class="cart-subtotal-row">
-                <span>Subtotal</span>
-                <span id="cartSubtotalDisplay" class="subtotal-val">$0</span>
-            </div>
-            <p class="cart-note">Pajak dan pengiriman ekspres dihitung saat checkout.</p>
-            <button class="btn btn-primary btn-block" onclick="triggerCheckout()">Proceed to Checkout</button>
-            <button class="btn btn-outline btn-block btn-sm" onclick="clearCart()">Kosongkan Bag</button>
-        </div>
-    </aside>
-
-    <!-- 2. Product Detail (Quick View) Modal with Fragrance Notes Pyramid -->
+    <!-- Product Detail (Quick View) Modal with Fragrance Notes Pyramid -->
     <div class="modal-backdrop" id="quickViewModal">
         <div class="modal-dialog modal-lg">
             <button class="close-modal-btn" onclick="closeModal('quickViewModal')">&times;</button>
@@ -330,12 +289,7 @@
                     </div>
 
                     <div class="modal-actions-row">
-                        <div class="quantity-input-group">
-                            <button onclick="changeQvQuantity(-1)">-</button>
-                            <input type="number" id="qvQuantityInput" value="1" min="1" max="10" readonly>
-                            <button onclick="changeQvQuantity(1)">+</button>
-                        </div>
-                        <button class="btn btn-primary flex-1" id="qvAddToCartBtn">Tambah ke Bag</button>
+                        <a href="#contacts" class="btn btn-primary flex-1" onclick="closeModal('quickViewModal')">Konsultasi / Order via Concierge</a>
                     </div>
                 </div>
             </div>

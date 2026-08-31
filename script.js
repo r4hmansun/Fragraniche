@@ -94,9 +94,7 @@ const PRODUCTS = [
 // ==========================================
 // 2. STATE MANAGEMENT
 // ==========================================
-let cart = [];
 let activeCategory = 'all';
-let searchQuery = '';
 let currentQuickViewProduct = null;
 let currentQuickViewSize = 50;
 
@@ -111,28 +109,6 @@ function renderProducts() {
 
     if (activeCategory !== 'all') {
         filtered = filtered.filter(p => p.category.toLowerCase() === activeCategory.toLowerCase());
-    }
-
-    if (searchQuery.trim() !== '') {
-        const q = searchQuery.toLowerCase();
-        filtered = filtered.filter(p => 
-            p.title.toLowerCase().includes(q) ||
-            p.subtitle.toLowerCase().includes(q) ||
-            (p.topNotes && p.topNotes.toLowerCase().includes(q)) ||
-            (p.heartNotes && p.heartNotes.toLowerCase().includes(q)) ||
-            (p.baseNotes && p.baseNotes.toLowerCase().includes(q)) ||
-            p.category.toLowerCase().includes(q)
-        );
-    }
-
-    if (filtered.length === 0) {
-        grid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
-                <p style="font-size: 1.2rem; font-family: var(--font-heading); margin-bottom: 0.5rem;">Tidak ada parfum yang cocok dengan pencarian.</p>
-                <p style="font-size: 0.9rem;">Coba gunakan kata kunci aroma lain atau pilih filter kategori di atas.</p>
-            </div>
-        `;
-        return;
     }
 
     grid.innerHTML = filtered.map(p => {
@@ -159,8 +135,8 @@ function renderProducts() {
                     </div>
                     <div class="product-card-footer">
                         <span class="product-card-price">$${p.price}</span>
-                        <button class="btn btn-outline btn-sm" onclick="addToCart('${p.id}', 50, 1)">
-                            + Bag
+                        <button class="btn btn-outline btn-sm" onclick="openQuickView('${p.id}')">
+                            Lihat Notes
                         </button>
                     </div>
                 </div>
@@ -196,15 +172,6 @@ function openQuickView(productId) {
     });
 
     updateQuickViewPrice();
-    document.getElementById('qvQuantityInput').value = 1;
-
-    const addBtn = document.getElementById('qvAddToCartBtn');
-    addBtn.onclick = () => {
-        const qty = parseInt(document.getElementById('qvQuantityInput').value, 10) || 1;
-        addToCart(p.id, currentQuickViewSize, qty);
-        closeModal('quickViewModal');
-    };
-
     openModal('quickViewModal');
 }
 
@@ -223,149 +190,8 @@ function updateQuickViewPrice() {
     document.getElementById('qvPrice').textContent = `$${finalPrice}`;
 }
 
-function changeQvQuantity(delta) {
-    const input = document.getElementById('qvQuantityInput');
-    let val = parseInt(input.value, 10) + delta;
-    if (val < 1) val = 1;
-    if (val > 10) val = 10;
-    input.value = val;
-}
-
 // ==========================================
-// 5. SHOPPING CART
-// ==========================================
-function addToCart(productId, size = 50, quantity = 1) {
-    const p = PRODUCTS.find(item => item.id === productId);
-    if (!p) return;
-
-    const unitPrice = size === 100 ? Math.round(p.price * 1.55) : p.price;
-    const cartItemId = `${p.id}-${size}`;
-
-    const existingIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-    if (existingIndex !== -1) {
-        cart[existingIndex].quantity += quantity;
-    } else {
-        cart.push({
-            cartItemId,
-            productId: p.id,
-            title: p.title,
-            price: unitPrice,
-            size: size,
-            image: p.image,
-            quantity: quantity
-        });
-    }
-
-    localStorage.setItem('fragraniche_cart', JSON.stringify(cart));
-    updateCartUI();
-    showToast(`"${p.title} (${size}ml)" ditambahkan ke keranjang.`);
-    openCartDrawer();
-}
-
-function updateCartItemQuantity(cartItemId, delta) {
-    const item = cart.find(i => i.cartItemId === cartItemId);
-    if (!item) return;
-
-    item.quantity += delta;
-    if (item.quantity <= 0) {
-        cart = cart.filter(i => i.cartItemId !== cartItemId);
-    }
-
-    localStorage.setItem('fragraniche_cart', JSON.stringify(cart));
-    updateCartUI();
-}
-
-function removeCartItem(cartItemId) {
-    cart = cart.filter(i => i.cartItemId !== cartItemId);
-    localStorage.setItem('fragraniche_cart', JSON.stringify(cart));
-    updateCartUI();
-    showToast('Item dihapus dari keranjang.');
-}
-
-function clearCart() {
-    if (cart.length === 0) return;
-    if (confirm('Kosongkan semua produk di bag?')) {
-        cart = [];
-        localStorage.setItem('fragraniche_cart', JSON.stringify(cart));
-        updateCartUI();
-        showToast('Keranjang telah dikosongkan.');
-    }
-}
-
-function updateCartUI() {
-    const countBadge = document.getElementById('cartCountBadge');
-    const drawerCount = document.getElementById('cartDrawerCount');
-    const itemsList = document.getElementById('cartItemsList');
-    const subtotalDisplay = document.getElementById('cartSubtotalDisplay');
-
-    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    if (countBadge) countBadge.textContent = totalCount;
-    if (drawerCount) drawerCount.textContent = totalCount;
-    if (subtotalDisplay) subtotalDisplay.textContent = `$${subtotal.toLocaleString()}`;
-
-    if (!itemsList) return;
-
-    if (cart.length === 0) {
-        itemsList.innerHTML = `
-            <div class="cart-empty-msg">
-                <p>Shopping bag Anda masih kosong.</p>
-                <button class="btn btn-outline btn-sm" style="margin-top: 1rem;" onclick="closeCartDrawer()">Eksplor Koleksi</button>
-            </div>
-        `;
-        return;
-    }
-
-    itemsList.innerHTML = cart.map(item => `
-        <div class="cart-item">
-            <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="cart-item-img">
-            <div class="cart-item-info">
-                <h4 class="cart-item-title">${escapeHtml(item.title)}</h4>
-                <div class="cart-item-meta">${item.size}ml &bull; $${item.price} / botol</div>
-                <div class="quantity-input-group" style="width: fit-content;">
-                    <button onclick="updateCartItemQuantity('${item.cartItemId}', -1)">-</button>
-                    <input type="number" value="${item.quantity}" readonly>
-                    <button onclick="updateCartItemQuantity('${item.cartItemId}', 1)">+</button>
-                </div>
-            </div>
-            <div class="cart-item-actions">
-                <span class="cart-item-price">$${item.price * item.quantity}</span>
-                <button class="cart-remove-btn" onclick="removeCartItem('${item.cartItemId}')">Hapus</button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function openCartDrawer() {
-    const drawer = document.getElementById('cartDrawer');
-    const overlay = document.getElementById('cartOverlay');
-    if (drawer) drawer.classList.add('active');
-    if (overlay) overlay.classList.add('active');
-}
-
-function closeCartDrawer() {
-    const drawer = document.getElementById('cartDrawer');
-    const overlay = document.getElementById('cartOverlay');
-    if (drawer) drawer.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-}
-
-function triggerCheckout() {
-    if (cart.length === 0) {
-        showToast('Bag belanja Anda masih kosong.');
-        return;
-    }
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    alert(`Pesanan Terkonfirmasi.\n\nTotal Pembelian: $${subtotal.toLocaleString()}\n\nConcierge Fragraniche akan segera menyiapkan botol parfum eksklusif untuk Anda.`);
-    cart = [];
-    localStorage.setItem('fragraniche_cart', JSON.stringify(cart));
-    updateCartUI();
-    closeCartDrawer();
-}
-
-// ==========================================
-// 6. MODAL & TOAST HELPERS
+// 5. MODAL & TOAST HELPERS
 // ==========================================
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -410,19 +236,10 @@ function escapeHtml(str) {
 }
 
 // ==========================================
-// 7. INITIALIZATION & EVENT LISTENERS
+// 6. INITIALIZATION & EVENT LISTENERS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Load stored cart
-    try {
-        const storedCart = localStorage.getItem('fragraniche_cart');
-        cart = storedCart ? JSON.parse(storedCart) : [];
-    } catch (e) {
-        cart = [];
-    }
-
     renderProducts();
-    updateCartUI();
 
     // Theme Toggle Handler (Header Sun / Moon Icon)
     const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -464,45 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
         });
     });
-
-    // Search Bar Drawer
-    const searchToggleBtn = document.getElementById('searchToggleBtn');
-    const searchDrawer = document.getElementById('searchDrawer');
-    const catalogSearchInput = document.getElementById('catalogSearchInput');
-    const clearSearchBtn = document.getElementById('clearSearchBtn');
-
-    if (searchToggleBtn && searchDrawer) {
-        searchToggleBtn.addEventListener('click', () => {
-            searchDrawer.classList.toggle('open');
-            if (searchDrawer.classList.contains('open') && catalogSearchInput) {
-                catalogSearchInput.focus();
-            }
-        });
-    }
-
-    if (catalogSearchInput) {
-        catalogSearchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderProducts();
-        });
-    }
-
-    if (clearSearchBtn && catalogSearchInput) {
-        clearSearchBtn.addEventListener('click', () => {
-            catalogSearchInput.value = '';
-            searchQuery = '';
-            renderProducts();
-        });
-    }
-
-    // Cart Drawer Toggles
-    const cartToggleBtn = document.getElementById('cartToggleBtn');
-    const closeCartBtn = document.getElementById('closeCartBtn');
-    const cartOverlay = document.getElementById('cartOverlay');
-
-    if (cartToggleBtn) cartToggleBtn.addEventListener('click', openCartDrawer);
-    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCartDrawer);
-    if (cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
 
     // Close modals on backdrop click
     document.querySelectorAll('.modal-backdrop').forEach(modal => {
