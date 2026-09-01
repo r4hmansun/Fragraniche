@@ -205,6 +205,8 @@
                             <label for="subject">Subjek Konsultasi</label>
                             <select id="subject" name="subject">
                                 <option value="Bespoke Fragrance Consultation">Bespoke Fragrance Consultation</option>
+                                <option value="Complimentary Discovery Samples">Complimentary Discovery Samples</option>
+                                <option value="Shipping & Authenticity Inquiry">Shipping & Authenticity Inquiry</option>
                                 <option value="Bottle Engraving Request">Bottle Engraving Request</option>
                                 <option value="Product Order Inquiry">Product Order Inquiry</option>
                                 <option value="Private Event / Wedding">Private Event / Wedding Gift</option>
@@ -237,11 +239,11 @@
                     <a href="#contacts">Contact Concierge</a>
                 </div>
                 <div class="footer-links">
-                    <h4>Pelayanan</h4>
-                    <a href="#">Bespoke Consultations</a>
-                    <a href="#">Complimentary Samples</a>
-                    <a href="#">Shipping & Authenticity</a>
-                    <a href="#">Privacy Policy</a>
+                    <h4>Layanan & Klien</h4>
+                    <a href="#contacts" onclick="selectInquiryPreference('Bespoke Fragrance Consultation', 'Halo Concierge, saya tertarik untuk menjadwalkan private bespoke fragrance consultation.'); return false;">Bespoke Consultations</a>
+                    <a href="javascript:void(0)" onclick="openInfoModal('samples')">Complimentary Samples</a>
+                    <a href="javascript:void(0)" onclick="openInfoModal('shipping')">Shipping & Authenticity</a>
+                    <a href="javascript:void(0)" onclick="openInfoModal('privacy')">Privacy Policy</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -299,8 +301,29 @@
                     </div>
 
                     <div class="modal-actions-row">
-                        <a href="#contacts" class="btn btn-primary flex-1" onclick="closeModal('quickViewModal')">Konsultasi / Order via Concierge</a>
+                        <button type="button" class="btn btn-primary flex-1" onclick="inquireProductFromQuickView()">Konsultasi / Order via Concierge</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Care & Policy Info Modal -->
+    <div class="modal-backdrop" id="infoModal">
+        <div class="modal-dialog modal-md">
+            <button class="close-modal-btn" onclick="closeModal('infoModal')">&times;</button>
+            <div class="info-modal-content">
+                <div class="info-modal-badge" id="infoModalBadge">
+                    <svg id="infoModalIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </div>
+                <span class="section-kicker" id="infoModalKicker">CLIENT CARE & POLICIES</span>
+                <h2 id="infoModalTitle" class="modal-info-title">Title</h2>
+                <div id="infoModalSubtitle" class="modal-info-subtitle">Subtitle</div>
+                <div id="infoModalBody" class="info-modal-body">
+                    <!-- Injected via JavaScript -->
+                </div>
+                <div class="info-modal-actions" id="infoModalActions">
+                    <!-- Injected via JavaScript -->
                 </div>
             </div>
         </div>

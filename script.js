@@ -344,6 +344,177 @@ function escapeHtml(str) {
 }
 
 // ==========================================
+// 7. CLIENT CARE INFO MODAL & PREFERENCES
+// ==========================================
+const CLIENT_INFO_CONTENT = {
+    samples: {
+        kicker: "DISCOVERY & EXPERIENCE",
+        title: "Complimentary Samples",
+        subtitle: "Experience rare compositions in the comfort of your private sanctuary before committing to a full flacon.",
+        badgeIcon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`,
+        bodyHtml: `
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>2 Complimentary 2ml Discovery Vials</strong>
+                    Setiap pemesanan botol flacon (50ml / 100ml) otomatis disertai 2 vial sampel gratis pilihan Anda untuk diuji sebelum membuka segel botol utama.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Private Discovery Flight Box</strong>
+                    Ingin mengeksplorasi seluruh portofolio sebelum membeli? Anda dapat mengajukan box kurasi 5 sampel aromatik melalui Concierge kami.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Credit Redemption Privilege</strong>
+                    Biaya discovery box dapat di-redeem penuh sebagai potongan saat Anda memesan flacon ukuran penuh berikutnya.
+                </div>
+            </div>
+        `,
+        actionsHtml: `
+            <button type="button" class="btn btn-primary flex-1" onclick="selectInquiryPreference('Complimentary Discovery Samples', 'Halo Concierge, saya tertarik untuk request complimentary discovery samples / sample set Fragraniche.');">Ajukan Request Sampel</button>
+            <button type="button" class="btn btn-outline" onclick="closeModal('infoModal')">Tutup</button>
+        `
+    },
+    shipping: {
+        kicker: "AUTHENTICITY & LOGISTICS",
+        title: "Shipping & Authenticity",
+        subtitle: "Uncompromising integrity from our Grasse atelier directly to your door.",
+        badgeIcon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>`,
+        bodyHtml: `
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>100% Certified Grasse Origins</strong>
+                    Setiap botol diformulasikan dengan botanical absolutes murni Prancis, dilengkapi serial batch number otentik dan segel lilin wax eksklusif.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Climate-Controlled Logistics</strong>
+                    Aroma extrait terlindungi dalam kemasan berinsulasi termal khusus untuk menjaga kestabilan molekul minyak atsiri selama perjalanan.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>White-Glove Express Delivery</strong>
+                    Pengiriman berasuransi penuh dengan garansi penggantian 100% jika terjadi kerusakan selama ekspedisi, lengkap dengan live tracking.
+                </div>
+            </div>
+        `,
+        actionsHtml: `
+            <button type="button" class="btn btn-primary flex-1" onclick="selectInquiryPreference('Shipping & Authenticity Inquiry', 'Halo Concierge, saya ingin menanyakan jadwal pengiriman dan ketersediaan batch resmi.');">Tanya Pengiriman / Batch</button>
+            <button type="button" class="btn btn-outline" onclick="closeModal('infoModal')">Tutup</button>
+        `
+    },
+    privacy: {
+        kicker: "DISCRETION & SECURITY",
+        title: "Client Discretion & Privacy",
+        subtitle: "Confidential handling for our distinguished collectors and private patrons.",
+        badgeIcon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
+        bodyHtml: `
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Bespoke Non-Disclosure</strong>
+                    Formulasi khusus (bespoke scent profiles) dan preferensi pribadi Anda diarsipkan dalam direktori privat terenkripsi tanpa publikasi.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Zero-Spam VIP Guarantee</strong>
+                    Data kontak hanya digunakan untuk konsultasi pesanan concierge Anda dan tidak pernah dibagikan kepada pihak ketiga mana pun.
+                </div>
+            </div>
+            <div class="info-modal-feature-item">
+                <div class="info-feature-bullet"></div>
+                <div class="info-feature-text">
+                    <strong>Discreet Packaging Option</strong>
+                    Tersedia opsi pengemasan luar tanpa branding mencolok untuk kenyamanan dan privasi pengantaran Anda.
+                </div>
+            </div>
+        `,
+        actionsHtml: `
+            <button type="button" class="btn btn-primary flex-1" onclick="closeModal('infoModal')">Saya Mengerti</button>
+        `
+    }
+};
+
+function openInfoModal(type) {
+    const data = CLIENT_INFO_CONTENT[type];
+    if (!data) return;
+
+    const kickerEl = document.getElementById('infoModalKicker');
+    const titleEl = document.getElementById('infoModalTitle');
+    const subtitleEl = document.getElementById('infoModalSubtitle');
+    const badgeEl = document.getElementById('infoModalBadge');
+    const bodyEl = document.getElementById('infoModalBody');
+    const actionsEl = document.getElementById('infoModalActions');
+
+    if (kickerEl) kickerEl.textContent = data.kicker;
+    if (titleEl) titleEl.textContent = data.title;
+    if (subtitleEl) subtitleEl.textContent = data.subtitle;
+    if (badgeEl) badgeEl.innerHTML = data.badgeIcon;
+    if (bodyEl) bodyEl.innerHTML = data.bodyHtml;
+    if (actionsEl) actionsEl.innerHTML = data.actionsHtml;
+
+    openModal('infoModal');
+}
+
+function selectInquiryPreference(subjectValue, messageText) {
+    closeModal('infoModal');
+    closeModal('quickViewModal');
+
+    const subjectSelect = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+    const contactSection = document.getElementById('contacts');
+    const contactForm = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+
+    if (subjectSelect && subjectValue) {
+        subjectSelect.value = subjectValue;
+    }
+
+    if (messageInput && messageText) {
+        messageInput.value = messageText;
+    }
+
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (contactForm) {
+        contactForm.classList.remove('form-highlight');
+        void contactForm.offsetWidth;
+        contactForm.classList.add('form-highlight');
+        setTimeout(() => {
+            contactForm.classList.remove('form-highlight');
+        }, 2200);
+    }
+
+    if (nameInput) {
+        setTimeout(() => {
+            nameInput.focus();
+        }, 650);
+    }
+}
+
+function inquireProductFromQuickView() {
+    if (!currentQuickViewProduct) return;
+    const title = currentQuickViewProduct.title;
+    const size = currentQuickViewSize || 50;
+    const message = `Halo Concierge, saya tertarik dengan flacon ${title} (${size}ml). Mohon informasi ketersediaan batch dan detail pemesanannya.`;
+    selectInquiryPreference('Product Order Inquiry', message);
+}
+
+// ==========================================
 // 6. INITIALIZATION & EVENT LISTENERS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -410,14 +581,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
 
             setTimeout(() => {
-                btn.textContent = 'Pesan Berhasil Terkirim';
+                btn.textContent = '✓ Permintaan Terkirim ke Concierge';
                 contactForm.reset();
 
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.disabled = false;
-                }, 3000);
-            }, 800);
+                }, 3500);
+            }, 700);
         });
     }
 });
