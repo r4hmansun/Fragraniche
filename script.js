@@ -548,6 +548,13 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuBtn.addEventListener('click', () => {
             nav.classList.toggle('active');
         });
+
+        // Close mobile nav when clicking any nav link
+        nav.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
     }
 
     // Category Filters
