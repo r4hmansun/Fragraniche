@@ -3,24 +3,25 @@
    ========================================================================== */
 
 :root {
-    /* Color Palette - Light Mode (Alabaster & Champagne Gold) */
-    --bg-primary: #FBF9F5;
-    --bg-secondary: #FFFFFF;
-    --bg-surface: #F3EFE6;
-    --bg-card: #FFFFFF;
-    --accent: #C5A059;
-    --accent-hover: #AF8B43;
-    --accent-glow: rgba(197, 160, 89, 0.25);
+    /* Color Palette - Light Mode (Warm Alabaster & Champagne Gold - Anti-Glare) */
+    --bg-primary: #F6F4EF;
+    --bg-secondary: #ECE7DE;
+    --bg-surface: #E3DDD1;
+    --bg-card: #FCFAF6;
+    --accent: #C5983A;
+    --accent-hover: #AF8326;
+    --accent-glow: rgba(197, 152, 58, 0.25);
+    --text-accent: #8E651E;
     
-    --text-primary: #171513;
-    --text-secondary: #5A5650;
-    --text-muted: #8E8A83;
+    --text-primary: #1C1A17;
+    --text-secondary: #58534C;
+    --text-muted: #8A857D;
     
-    --border-color: rgba(23, 21, 19, 0.1);
-    --border-gold: rgba(197, 160, 89, 0.35);
-    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
-    --shadow-elevated: 0 12px 36px rgba(0, 0, 0, 0.08);
-    --shadow-gold: 0 8px 30px rgba(197, 160, 89, 0.2);
+    --border-color: rgba(28, 26, 23, 0.08);
+    --border-gold: rgba(197, 152, 58, 0.35);
+    --shadow-subtle: 0 4px 20px rgba(28, 26, 23, 0.04);
+    --shadow-elevated: 0 12px 36px rgba(28, 26, 23, 0.07);
+    --shadow-gold: 0 8px 30px rgba(197, 152, 58, 0.22);
 
     /* Typography */
     --font-heading: 'Playfair Display', Georgia, serif;
@@ -44,6 +45,7 @@
     --accent: #D4AF37;
     --accent-hover: #E5C358;
     --accent-glow: rgba(212, 175, 55, 0.3);
+    --text-accent: #E5C358;
     
     --text-primary: #F8F6F0;
     --text-secondary: #B8B3A8;
@@ -359,13 +361,22 @@ button, input, select, textarea {
 }
 
 .section-kicker {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-accent);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--text-accent);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-gold);
+    padding: 0.32rem 0.95rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 0.85rem;
     text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: var(--transition);
 }
 
 .section-title {
@@ -393,12 +404,22 @@ button, input, select, textarea {
 }
 
 .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-accent);
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--text-accent);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-gold);
+    padding: 0.38rem 1.05rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.1rem;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: var(--transition);
 }
 
 .hero-title {
@@ -462,7 +483,7 @@ button, input, select, textarea {
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-accent);
     font-weight: 700;
     display: block;
 }
@@ -479,6 +500,7 @@ button, input, select, textarea {
 
 .collection-section {
     background-color: var(--bg-primary);
+    transition: background-color var(--transition);
 }
 
 .section-header-row {
@@ -603,7 +625,7 @@ button, input, select, textarea {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color var(--transition);
     position: relative;
 }
 
@@ -687,7 +709,7 @@ button, input, select, textarea {
 .product-card-conc {
     font-size: 0.7rem;
     letter-spacing: 0.15em;
-    color: var(--accent);
+    color: var(--text-accent);
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 0.25rem;
@@ -744,6 +766,7 @@ button, input, select, textarea {
 
 .about {
     background-color: var(--bg-secondary);
+    transition: background-color var(--transition);
 }
 
 .about-grid {
@@ -804,6 +827,7 @@ button, input, select, textarea {
 
 .services {
     background-color: var(--bg-primary);
+    transition: background-color var(--transition);
 }
 
 .services-grid {
@@ -858,6 +882,7 @@ button, input, select, textarea {
 
 .contacts {
     background-color: var(--bg-secondary);
+    transition: background-color var(--transition);
 }
 
 .contacts-grid {
@@ -872,6 +897,7 @@ button, input, select, textarea {
     padding: 2.5rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
+    transition: background-color var(--transition), border-color var(--transition);
 }
 
 .contact-info h3 {
@@ -896,6 +922,7 @@ button, input, select, textarea {
     padding: 2.5rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
+    transition: background-color var(--transition), border-color var(--transition);
 }
 
 .form-group {
@@ -1020,6 +1047,7 @@ textarea:focus {
     box-shadow: var(--shadow-elevated);
     padding: 2.2rem;
     animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color var(--transition), border-color var(--transition);
 }
 
 .modal-lg { max-width: 880px; }
@@ -1283,15 +1311,17 @@ textarea:focus {
     padding: 1rem 1.2rem;
     margin-bottom: 1.2rem;
     border: 1px solid var(--border-color);
+    transition: background-color var(--transition), border-color var(--transition);
 }
 
 .notes-pyramid-title {
     font-size: 0.8rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-accent);
     margin-bottom: 0.6rem;
     font-family: var(--font-accent);
+    font-weight: 600;
 }
 
 .note-level {
